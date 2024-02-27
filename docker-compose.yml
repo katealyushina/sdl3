@@ -1,0 +1,34 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  app:
+    image: app:1.0
+    restart: always
+    build:
+      context: ./dotnet/PgConnect/
+    ports:
+      - "2222:22"
+    env_file:
+      - ./env
+    volumes:
+      - ./app.log:/app/app.log
+
+  db:
+    image: postgres:1.0
+    restart: always
+    build:
+      context: ./postgres/
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

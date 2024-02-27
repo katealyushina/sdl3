@@ -1,0 +1,25 @@
+CREATE TABLE Projects(
+id SERIAL PRIMARY KEY,
+name VARCHAR(255) UNIQUE,
+code VARCHAR(255)
+);
+
+CREATE TABLE Materials (
+id SERIAL PRIMARY KEY,
+project_id INT,
+name VARCHAR(255),
+class VARCHAR(255),
+weight FLOAT,
+length FLOAT,
+FOREIGN KEY (project_id) REFERENCES Projects(id)
+);
+
+CREATE TABLE Classes (
+id SERIAL PRIMARY KEY,
+name VARCHAR(255) UNIQUE
+);
+
+CREATE TABLE Tests (
+id SERIAL PRIMARY KEY,
+name VARCHAR(255)
+);
